@@ -1,10 +1,11 @@
-import React from "react";
 import "./user.css";
 
 export default function User() {
   return (
     <div className="userTable">
-      <Button className="btn" btnTxt="Add Users" />
+      <Button className="btn">
+        Add User <i class="fa-solid fa-user-plus"></i>
+      </Button>
       {/* Table heading */}
       <table className="table">
         <thead>
@@ -35,18 +36,18 @@ export default function User() {
             <td className="data">apurbadutta2099@gmail.com</td>
             <td className="data">741247, Payradanga</td>
             <td className="data">
-              <div className="action-btn">Update | Delete</div>
-            </td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr className="table-row">
-            <td className="data">1</td>
-            <td className="data">Apurba Dutta</td>
-            <td className="data">apurbadutta2099@gmail.com</td>
-            <td className="data">741247, Payradanga</td>
-            <td className="data">
-              <div className="action-btn">Update | Delete</div>
+              <div className="action-box">
+                <Button
+                  className="action-btn"
+                  style={{ background: "lightGreen" }}
+                >
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </Button>
+                |
+                <Button className="action-btn" style={{ background: "red" }}>
+                  <i class="fa-solid fa-trash"></i>
+                </Button>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -55,6 +56,10 @@ export default function User() {
   );
 }
 
-function Button({ btnTxt, className }) {
-  return <button className={className}>{btnTxt}</button>;
+function Button({ children, className, style }) {
+  return (
+    <button style={style} className={className}>
+      {children}
+    </button>
+  );
 }

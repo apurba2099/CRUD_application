@@ -29,9 +29,25 @@
   padding: 12px;
   text-align: center;
 }
-
+.action-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.action-btn {
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  padding: 6px;
+  border-radius: 8px;
+  transition: 0.1s ease-out all;
+}
+.action-btn:active {
+  transform: scale(0.9);
+}
 .btn {
-  padding: 4px 8px;
+  padding: 6px 8px;
   margin: 6px 2px;
   background-color: #405cf5;
   border: 2px solid #000;
