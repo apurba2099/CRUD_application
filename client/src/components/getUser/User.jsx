@@ -1,10 +1,24 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./user.css";
 
 export default function User() {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/users");
+        setUsers(response.data);
+      } catch (error) {
+        console.log("Error while fetching data", error);
+      }
+    };
+    fetchData();
+  }, []); // At the end set this: [] cause the useEffect run only one!
   return (
     <div className="userTable">
       <Button className="btn">
-        Add User <i class="fa-solid fa-user-plus"></i>
+        Add User <i className="fa-solid fa-user-plus"></i>
       </Button>
       {/* Table heading */}
       <table className="table">
@@ -30,26 +44,33 @@ export default function User() {
 
         {/* Table body data */}
         <tbody>
-          <tr className="table-row">
-            <td className="data">1</td>
-            <td className="data">Apurba Dutta</td>
-            <td className="data">apurbadutta2099@gmail.com</td>
-            <td className="data">741247, Payradanga</td>
-            <td className="data">
-              <div className="action-box">
-                <Button
-                  className="action-btn"
-                  style={{ background: "lightGreen" }}
-                >
-                  <i class="fa-solid fa-pen-to-square"></i>
-                </Button>
-                |
-                <Button className="action-btn" style={{ background: "red" }}>
-                  <i class="fa-solid fa-trash"></i>
-                </Button>
-              </div>
-            </td>
-          </tr>
+          {users.map((user, index) => {
+            return (
+              <tr className="table-row" key={user.email}>
+                <td className="data">{index + 1}</td>
+                <td className="data">{user.name}</td>
+                <td className="data">{user.email}</td>
+                <td className="data">{user.address}</td>
+                <td className="data">
+                  <div className="action-box">
+                    <Button
+                      className="action-btn"
+                      style={{ background: "lightGreen" }}
+                    >
+                      <i className="fa-solid fa-pen-to-square"></i>
+                    </Button>
+                    |
+                    <Button
+                      className="action-btn"
+                      style={{ background: "red" }}
+                    >
+                      <i className="fa-solid fa-trash"></i>
+                    </Button>
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
