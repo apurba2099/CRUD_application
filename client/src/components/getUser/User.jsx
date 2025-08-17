@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./user.css";
 
 export default function User() {
@@ -17,9 +18,9 @@ export default function User() {
   }, []); // At the end set this: [] cause the useEffect run only one!
   return (
     <div className="userTable">
-      <Button className="btn">
+      <Link to="/add" className="btn">
         Add User <i className="fa-solid fa-user-plus"></i>
-      </Button>
+      </Link>
       {/* Table heading */}
       <table className="table">
         <thead>
