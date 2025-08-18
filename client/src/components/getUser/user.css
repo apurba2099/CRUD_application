@@ -22,6 +22,11 @@
   text-decoration: underline;
 }
 
+.para {
+  text-align: center;
+  font-size: 1.1rem;
+  padding: 8px;
+}
 .data {
   border: 1px solid lightgrey;
   border-radius: 8px;
