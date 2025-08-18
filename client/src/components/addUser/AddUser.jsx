@@ -1,6 +1,42 @@
+import { useState } from "react";
 import "./adduser.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 export default function AddUser() {
+  const users = {
+    name: "",
+    email: "",
+    address: "",
+  };
+
+  //Use useState hook for manage the user form data
+  const [user, setUser] = useState(users);
+
+  //useNavigate (Router function) use for navigate after sending/post data
+  const navigate = useNavigate();
+
+  //Input function  changes for input fileds
+  function inputHandler(e) {
+    const { name, value } = e.target;
+    // console.log(name, value);
+
+    setUser({ ...user, [name]: value });
+  }
+
+  // Form submit function to backend
+  const submitFunction = async (e) => {
+    e.preventDefault();
+
+    await axios
+      .post("http://localhost:8000/api/users", user)
+      .then((response) => {
+        console.log("User create successfully");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="addUser">
       <Link
@@ -8,37 +44,39 @@ export default function AddUser() {
         style={{ width: "150px", textAlign: "center", fontSize: "1rem" }}
         className="btn"
       >
-        <i class="fa-solid fa-backward"></i> Back
+        <i className="fa-solid fa-backward"></i> Back
       </Link>
       <h3>
-        Add New User <i class="fa-solid fa-user"></i>
+        Add New User <i className="fa-solid fa-user"></i>
       </h3>
-      <form className="addUserForm">
+      <form className="addUserForm" onSubmit={submitFunction}>
         {/* NAME FIELD  */}
         <div className="inputGroup">
           <label htmlFor="address">Name:</label>
           <Input
             type="text"
-            id="Name"
-            name="Name"
+            id="name"
+            name="name"
             autoComplete="off"
             placeholder="Enter Your Name"
+            onChange={inputHandler}
           />
         </div>
 
         {/* EMAIL FIELD  */}
         <div className="inputGroup">
-          <label htmlFor="address">Address:</label>
+          <label htmlFor="email">Address:</label>
           <Input
             type="text"
             id="email"
             name="email"
             autoComplete="off"
             placeholder="Enter Your Email"
+            onChange={inputHandler}
           />
         </div>
 
-        {/* NAME FIELD  */}
+        {/* ADDRESS FIELD  */}
         <div className="inputGroup">
           <label htmlFor="address">Address:</label>
           <Input
@@ -47,12 +85,13 @@ export default function AddUser() {
             name="address"
             autoComplete="off"
             placeholder="Enter Your Address"
+            onChange={inputHandler}
           />
         </div>
 
         {/* BUTTON SUBMIT */}
         <div className="inputGroup">
-          <Button style={{ width: "200px" }} type={"button"} className="btn">
+          <Button style={{ width: "200px" }} type="submit" className="btn">
             Submit
           </Button>
         </div>
@@ -61,7 +100,14 @@ export default function AddUser() {
   );
 }
 
-function Input({ type = "text", id, name, autoComplete = "off", placeholder }) {
+function Input({
+  type = "text",
+  id,
+  name,
+  autoComplete = "off",
+  placeholder,
+  onChange,
+}) {
   return (
     <input
       type={type}
@@ -69,6 +115,7 @@ function Input({ type = "text", id, name, autoComplete = "off", placeholder }) {
       name={name}
       autoComplete={autoComplete}
       placeholder={placeholder}
+      onChange={onChange}
     />
   );
 }
