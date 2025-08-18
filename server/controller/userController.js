@@ -19,7 +19,10 @@ export const create = async (req, res) => {
     //If user does'not exist
     const saveData = await newUser.save();
     //Sending data!
-    res.status(200).json(saveData); //200 OK Status
+    // res.status(200).json(saveData); //200 OK Status
+
+    //FOR TOASTER MESSAGE and PostMan json output to json:message = user create successfullly
+    res.status(200).json({ message: "User created successfully!✅" });
   } catch (error) {
     res.status(500).json({
       errorMessage: error.message,
@@ -114,4 +117,3 @@ export const remove = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-

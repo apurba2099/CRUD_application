@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./adduser.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
+
 export default function AddUser() {
   const users = {
     name: "",
@@ -30,7 +32,10 @@ export default function AddUser() {
     await axios
       .post("http://localhost:8000/api/users", user)
       .then((response) => {
-        console.log("User create successfully");
+        // console.log("User create successfully");
+
+        //FOR Toaster Message Print
+        toast.success(response.data.message, { position: "top-right" });
         navigate("/");
       })
       .catch((error) => {
