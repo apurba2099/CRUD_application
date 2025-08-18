@@ -1,10 +1,10 @@
-import { useState } from "react";
-import "./adduser.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import "./updateuser.css";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-export default function AddUser() {
+export default function UpdateUser() {
   const users = {
     name: "",
     email: "",
@@ -17,6 +17,9 @@ export default function AddUser() {
   //useNavigate (Router function) use for navigate after sending/post data
   const navigate = useNavigate();
 
+  //The hook useParams is used to read dynamic parameters from the URL.
+  const { id } = useParams();
+
   //Input function  changes for input fileds
   function inputHandler(e) {
     const { name, value } = e.target;
@@ -25,12 +28,24 @@ export default function AddUser() {
     setUser({ ...user, [name]: value });
   }
 
+  //Set up the dynamic user id in the URL
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/users/${id}`)
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id]); // [id] dependecy's array means its just one time called!
+
   // Form submit function to backend
   const submitFunction = async (e) => {
     e.preventDefault();
 
     await axios
-      .post("http://localhost:8000/api/users", user)
+      .put(`http://localhost:8000/api/users/${id}`, user)
       .then((response) => {
         // console.log("User create successfully");
 
@@ -49,10 +64,10 @@ export default function AddUser() {
         style={{ width: "150px", textAlign: "center", fontSize: "1rem" }}
         className="btn"
       >
-        <i className="fa-solid fa-backward"></i> Back
+        <i className="fa-solid fa-backward"></i>Back
       </Link>
       <h3>
-        Add New User <i className="fa-solid fa-user"></i>
+        Update User <i className="fa-solid fa-user"></i>
       </h3>
       <form className="addUserForm" onSubmit={submitFunction}>
         {/* NAME FIELD  */}
@@ -62,6 +77,7 @@ export default function AddUser() {
             type="text"
             id="name"
             name="name"
+            value={user.name}
             autoComplete="off"
             placeholder="Enter Your Name"
             onChange={inputHandler}
@@ -75,6 +91,7 @@ export default function AddUser() {
             type="text"
             id="email"
             name="email"
+            value={user.email}
             autoComplete="off"
             placeholder="Enter Your Email"
             onChange={inputHandler}
@@ -88,6 +105,7 @@ export default function AddUser() {
             type="text"
             id="address"
             name="address"
+            value={user.address}
             autoComplete="off"
             placeholder="Enter Your Address"
             onChange={inputHandler}
@@ -109,6 +127,7 @@ function Input({
   type = "text",
   id,
   name,
+  value,
   autoComplete = "off",
   placeholder,
   onChange,
@@ -121,6 +140,7 @@ function Input({
       autoComplete={autoComplete}
       placeholder={placeholder}
       onChange={onChange}
+      value={value}
     />
   );
 }

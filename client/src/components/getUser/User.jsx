@@ -54,13 +54,19 @@ export default function User() {
                 <td className="data">{user.address}</td>
                 <td className="data">
                   <div className="action-box">
-                    <Button
+                    {/* ROUTE THE UPDATE USER_ID  */}
+                    <Link
+                      to={`/update/` + user._id}
                       className="action-btn"
-                      style={{ background: "lightGreen" }}
+                      style={{
+                        background: "lightGreen",
+                        textDecoration: "none",
+                        color: "#000",
+                      }}
                       type="button"
                     >
                       <i className="fa-solid fa-pen-to-square"></i>
-                    </Button>
+                    </Link>
                     |
                     <Button
                       className="action-btn"

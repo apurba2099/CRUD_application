@@ -22,7 +22,7 @@ export const create = async (req, res) => {
     // res.status(200).json(saveData); //200 OK Status
 
     //FOR TOASTER MESSAGE and PostMan json output to json:message = user create successfullly
-    res.status(200).json({ message: "User created successfully!✅" });
+    res.status(200).json({ message: "User Created Successfully!✅" });
   } catch (error) {
     res.status(500).json({
       errorMessage: error.message,
@@ -90,7 +90,10 @@ export const update = async (req, res) => {
     });
 
     //Sending data!
-    res.status(200).json(updatedData);
+    // res.status(200).json(updatedData);
+
+    //FOR TOASTER MESSAGE and PostMan json output to json:message = user update successfullly
+    res.status(200).json({ message: "User Updated Successfully!✅" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
