@@ -13,4 +13,21 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+h1 {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 6px;
+  padding: 8px;
+  margin: 20px;
+  box-shadow: 3px 3px #363333;
+  background-color: #405cf5;
+  color: #fff;
+  font-weight: 700;
 }
