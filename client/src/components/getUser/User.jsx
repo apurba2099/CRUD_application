@@ -57,6 +57,7 @@ export default function User() {
                     <Button
                       className="action-btn"
                       style={{ background: "lightGreen" }}
+                      type="button"
                     >
                       <i className="fa-solid fa-pen-to-square"></i>
                     </Button>
@@ -64,6 +65,7 @@ export default function User() {
                     <Button
                       className="action-btn"
                       style={{ background: "red" }}
+                      type="button"
                     >
                       <i className="fa-solid fa-trash"></i>
                     </Button>
@@ -78,9 +80,9 @@ export default function User() {
   );
 }
 
-function Button({ children, className, style }) {
+function Button({ children, className, style, type = "button" }) {
   return (
-    <button style={style} className={className}>
+    <button style={style} className={className} type={type}>
       {children}
     </button>
   );
