@@ -33,10 +33,7 @@ export default function App() {
         }}
       >
         <p>
-          <a
-            style={{ color: "blue" }}
-            href="mailto:apurbadutta2099@gmail.com.com"
-          >
+          <a style={{ color: "blue" }} href="mailto:apurbadutta2099@gmail.com">
             apurbadutta
           </a>
           ©{new Date().getFullYear()}. All rights reserved.
