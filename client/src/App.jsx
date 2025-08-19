@@ -22,7 +22,7 @@ export default function App() {
   ]);
   return (
     <div className="container">
-      <h1>&lt;The CURD Data-Base System/&gt;</h1>
+      <h1>&lt;The CRUD Data-Base System/&gt;</h1>
       <RouterProvider router={route}></RouterProvider>
       <Footer
         style={{
