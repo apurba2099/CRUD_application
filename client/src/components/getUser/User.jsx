@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import "./user.css";
 
+import { API_LINK } from "../../utility/config";
+// console.log(API_LINK);
+
 export default function User() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/users");
+        const response = await axios.get(`${API_LINK}/users`);
         setUsers(response.data);
       } catch (error) {
         console.log("Error while fetching data", error);
@@ -21,7 +24,7 @@ export default function User() {
   //Delete User data Axios Delete function
   const deleteUser = async (userID) => {
     await axios
-      .delete(`http://localhost:8000/api/users/${userID}`)
+      .delete(`${API_LINK}users/${userID}`)
       .then((response) => {
         //This Code basically remove the user from the list of users by checking the user id comparing with the provided user id.
         setUsers((prevUser) => prevUser.filter((user) => user._id !== userID));

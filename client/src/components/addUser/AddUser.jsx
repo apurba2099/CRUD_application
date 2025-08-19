@@ -3,6 +3,7 @@ import "./adduser.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { API_LINK } from "../../utility/config";
 
 export default function AddUser() {
   const users = {
@@ -30,7 +31,7 @@ export default function AddUser() {
     e.preventDefault();
 
     await axios
-      .post("http://localhost:8000/api/users", user)
+      .post(`${API_LINK}/users`, user)
       .then((response) => {
         // console.log("User create successfully");
 

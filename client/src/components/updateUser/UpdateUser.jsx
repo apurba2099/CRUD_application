@@ -3,6 +3,7 @@ import "./updateuser.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { API_LINK } from "../../utility/config";
 
 export default function UpdateUser() {
   const users = {
@@ -31,7 +32,7 @@ export default function UpdateUser() {
   //Set up the dynamic user id in the URL
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/users/${id}`)
+      .get(`${API_LINK}/users/${id}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -43,9 +44,9 @@ export default function UpdateUser() {
   // Form submit function to backend
   const submitFunction = async (e) => {
     e.preventDefault();
-
+    // http://localhost:8000/api/users/${id}
     await axios
-      .put(`http://localhost:8000/api/users/${id}`, user)
+      .put(`${API_LINK}/users/${id}`, user)
       .then((response) => {
         // console.log("User create successfully");
 
