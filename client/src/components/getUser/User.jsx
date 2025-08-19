@@ -24,7 +24,7 @@ export default function User() {
   //Delete User data Axios Delete function
   const deleteUser = async (userID) => {
     await axios
-      .delete(`${API_LINK}users/${userID}`)
+      .delete(`${API_LINK}/users/${userID}`)
       .then((response) => {
         //This Code basically remove the user from the list of users by checking the user id comparing with the provided user id.
         setUsers((prevUser) => prevUser.filter((user) => user._id !== userID));
