@@ -40,7 +40,8 @@ export default function AddUser() {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        const errMsg = error.response?.data?.message || "Something went wrong!";
+        toast.error(errMsg, { position: "top-right" });
       });
   };
   return (
